@@ -1,11 +1,11 @@
 import tkinter as tk
+import random
 
 root = tk.Tk()
-root.geometry("100x100")
-root.mainloop()
+root.geometry("1440x900")
 
-#class code:
-import random
+title = tk.Label(root, text = "HANGMAN", font = ("Arial", 40))
+title.pack()
 
 def choose_word():
   words = open("words.txt").readlines()
@@ -105,3 +105,4 @@ def main():
     game_over = game_status(secret_word, chosen_letters)
 
 main()
+root.mainloop()
