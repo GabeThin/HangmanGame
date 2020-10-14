@@ -2,7 +2,7 @@ import tkinter as tk
 
 root = tk.Tk()
 root.geometry("100x100")
-root.mainloop
+root.mainloop()
 
 #class code:
 import random
@@ -11,7 +11,6 @@ def choose_word():
   words = open("words.txt").readlines()
   myword = random.choice(words)
   return (myword)
-  #return 'the'
 
 def display_word(word,chosen):
   #show the word in its current state including blanks for letters not chosen.
@@ -95,16 +94,14 @@ def show_hangman(wrongCounter):
   else:
     print("      |")
 
-
-#print(game_status('the','thexxx'))
-
 def main():
   game_over = False
-  secret_word = choose_word()
+  # secret_word = choose_word()
+  secret_word = "the"
   chosen_letters = ""
   while game_over == False:
     print(display_word(secret_word, chosen_letters))
     chosen_letters += handle_guess(secret_word)
     game_over = game_status(secret_word, chosen_letters)
 
-main() 
+main()
