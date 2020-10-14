@@ -3,9 +3,14 @@ import random
 
 root = tk.Tk()
 root.geometry("1440x900")
+frame = tk.Frame(root)
+frame.pack()
 
-title = tk.Label(root, text = "HANGMAN", font = ("Arial", 40))
+title = tk.Label(frame, text = "HANGMAN", font = ("Arial", 40))
 title.pack()
+
+
+
 
 def choose_word():
   words = open("words.txt").readlines()
