@@ -1,16 +1,5 @@
-import tkinter as tk
+from tkinter import *
 import random
-
-root = tk.Tk()
-root.geometry("1440x900")
-frame = tk.Frame(root)
-frame.pack()
-
-title = tk.Label(frame, text = "HANGMAN", font = ("Arial", 40))
-title.pack()
-
-
-
 
 def choose_word():
   words = open("words.txt").readlines()
@@ -31,16 +20,22 @@ def display_word(word,chosen):
 
 def handle_guess(word):
   #get the guess, update chosen, give feedback to user such as -- you are correct
-  letter = input("guess a letter: ")
+  guess_text = Label(root, text = "enter letter guess:")
+  guess_text.pack(padx = (100, 0), side=LEFT)
+  guess = Entry(root)
+  guess.pack(side=LEFT)
+  letter = guess.get()
+  print(letter)
+
   if len(letter) == 1:
     if letter in word:
-      print("correct")
+      print("correct") 
       print("")
 
     else:
       print("incorrect")
       print("")
-    
+
   else:
     print("You can only guess one letter at a time")
 
@@ -100,6 +95,8 @@ def show_hangman(wrongCounter):
     print("      |")
 
 def main():
+  for i in root.winfo_children():
+    i.destroy()
   game_over = False
   # secret_word = choose_word()
   secret_word = "the"
@@ -109,5 +106,21 @@ def main():
     chosen_letters += handle_guess(secret_word)
     game_over = game_status(secret_word, chosen_letters)
 
-main()
+root = Tk()
+root.geometry("1440x900")
+frame = Frame(root)
+frame.pack()
+
+def init_GUI():
+  title = Label(frame, text = "HANGMAN", font = ("Arial", 40))
+  title.pack(pady = 100)
+
+  default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main)
+  default.pack(pady = (350, 0), padx = 100, side = LEFT)
+
+  timed = Button(frame, text = "TIMED", font = ("Arial", 24))
+  timed.pack(pady = (350, 0), padx = 100, side = LEFT)
+
+init_GUI()
+
 root.mainloop()
