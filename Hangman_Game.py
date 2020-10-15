@@ -99,7 +99,6 @@ def main_default():
     i.destroy()
   game_over = False
   secret_word = choose_word()
-  secret_word = "the"
   chosen_letters = ""
   while game_over == False:
     print(display_word(secret_word, chosen_letters))
