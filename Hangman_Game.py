@@ -34,7 +34,7 @@ def handle_guess():
             blanks = Label(root, textvariable=display)
             blanks.pack(padx=(100, 0), side=LEFT)
             display.set(display_word(secret_word, chosen_letters))
-            display.destroy()
+            blanks.destroy()
             
         else:
             print("incorrect")
