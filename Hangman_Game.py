@@ -11,7 +11,7 @@ def choose_word():
 
 def display_word(word, chosen):
     # show the word in its current state including blanks for letters not chosen.
-    display_string = StringVar()
+    display_string = ""
 
     for i in range(0, len(word)):
         if (word[i] in chosen):
@@ -30,7 +30,7 @@ def handle_guess():
     if len(letter) == 1:
         if letter in word:
             print("correct")
-            display = ""
+            display = StringVar()
             blanks = Label(root, textvariable=display)
             blanks.pack(padx=(100, 0), side=LEFT)
             display.set(display_word(secret_word, chosen_letters))
