@@ -94,7 +94,7 @@ def timed_GUI():
   guess_text.pack(padx=(100, 0), side=LEFT)
   guess = Entry(root)
   guess.pack(side=LEFT)
-  letter = guess.get()
+  print(guess.get())
   secret_word = "the"
 
 def main_timed():
@@ -106,12 +106,12 @@ def main_timed():
   timed_GUI()
 
   chosen_letters = ""
-  while game_over == False:
-    word_display = Label(root, text="the")
-
-    word_display.pack(pady = (350, 0), padx = 100, side = LEFT)
-    chosen_letters += handle_guess(secret_word, chosen_letters)
-    game_over = game_status(secret_word, chosen_letters)
+  # while game_over == False:
+    # word_display = Label(root, text="the")
+    #
+    # word_display.pack(pady = (350, 0), padx = 100, side = LEFT)
+    # chosen_letters += handle_guess(secret_word, chosen_letters)
+    # game_over = game_status(secret_word, chosen_letters)
 
 root = Tk()
 root.geometry("1440x900")
@@ -129,5 +129,5 @@ def init_GUI():
   timed.pack(pady = (350, 0), padx = 100, side = LEFT)
 
 init_GUI()
-root.bind("<Return>", handle_guess("the", "b"))
+# root.bind("<Return>", handle_guess("the", "b"))
 root.mainloop()
