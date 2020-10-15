@@ -34,13 +34,17 @@ def handle_guess():
             blanks = Label(root, textvariable=display)
             blanks.pack(padx=(100, 0), side=LEFT)
             display.set(display_word(secret_word, chosen_letters))
-            desplay.destroy()
+            display.destroy()
+            
         else:
             print("incorrect")
 
     else:
         print("You can only guess one letter at a time")
     return letter[0]
+
+def clear_display():
+    pass
 
 
 def game_status(word, chosen):
@@ -118,7 +122,7 @@ def main_timed():
 
     guess.pack(side=LEFT)
 
-    submit = Button(root, text="Submit Guess", font=("Arial", 24), command=handle_guess)
+    submit = Button(root, text="Submit Guess", font=("Arial", 24), command=lambda:[handle_guess(), clear_display()])
     submit.pack(side=LEFT)
 
     while game_over == False:
