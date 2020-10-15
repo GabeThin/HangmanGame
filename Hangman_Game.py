@@ -41,10 +41,11 @@ def handle_guess():
         else:
             print("incorrect")
         next_round= False
-        return letter[0]
+        
 
     else:
         print("You can only guess one letter at a time")
+    return letter[0]
 
 
 # def clear_display():
