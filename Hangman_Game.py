@@ -1,7 +1,7 @@
 from tkinter import *
 import random
 
-next_round = True
+
 correct = False
 
 def choose_word():
@@ -106,6 +106,7 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
+    next_round = True
     print(next_round)
     game_over = False
     global chosen_letters
@@ -126,6 +127,7 @@ def main_timed():
             submit.pack(side=LEFT)
             chosen_letters += handle_guess()
             game_over = game_status(secret_word, chosen_letters)
+            next_round = False
         else:
             for i in root.winfo_children():
                 i.destroy()
