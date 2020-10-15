@@ -114,7 +114,7 @@ def main_timed():
   chosen_letters = ""
   while game_over == False:
     text.insert (INSERT, display_word(secret_word, chosen_letters))
-    text.pack
+    text.pack(pady = (350, 0), padx = 100, side = LEFT)
     chosen_letters += handle_guess(secret_word)
     game_over = game_status(secret_word, chosen_letters)
 
