@@ -126,8 +126,9 @@ def main_timed():
             game_over = game_status(secret_word, chosen_letters)
             next_round = False
         else:
-            for i in root.winfo_children():
-                i.destroy()
+            widget_list = all_children(window)
+            for item in widget_list:
+                item.pack_forget()
             next_round= True
            
         
@@ -135,6 +136,13 @@ root = Tk()
 root.geometry("1440x900")
 frame = Frame(root)
 frame.pack()
+
+def all_widgets (window) :
+    widget_list = window.winfo_children()
+    for item in widget_list :
+        if item.winfo_children():
+            _list.extend(item.winfo_children())
+    return _list
 
 
 def init_GUI():
