@@ -18,18 +18,13 @@ def display_word(word,chosen):
 
   return display_string
 
-def handle_guess(word):
+def handle_guess(word, letter):
   #get the guess, update chosen, give feedback to user such as -- you are correct
-  guess_text = Label(root, text = "enter letter guess:")
-  guess_text.pack(padx = (100, 0), side=LEFT)
-  guess = Entry(root)
-  guess.pack(side=LEFT)
-  letter = guess.get()
   print(letter)
 
   if len(letter) == 1:
     if letter in word:
-      print("correct") 
+      print("correct")
       print("")
 
     else:
@@ -94,27 +89,28 @@ def show_hangman(wrongCounter):
   else:
     print("      |")
 
-def main_default():
-  for i in root.winfo_children():
-    i.destroy()
-  game_over = False
-  secret_word = choose_word()
-  chosen_letters = ""
-  while game_over == False:
-    print(display_word(secret_word, chosen_letters))
-    chosen_letters += handle_guess(secret_word)
-    game_over = game_status(secret_word, chosen_letters)
-    
+def timed_GUI():
+  guess_text = Label(root, text="enter letter guess:")
+  guess_text.pack(padx=(100, 0), side=LEFT)
+  guess = Entry(root)
+  guess.pack(side=LEFT)
+  letter = guess.get()
+  secret_word = "the"
+
 def main_timed():
   for i in root.winfo_children():
     i.destroy()
   game_over = False
-  secret_word = choose_word()
+  secret_word = "the"
+
+  timed_GUI()
+
   chosen_letters = ""
   while game_over == False:
-    word_display = Label(frame, text = display_word(secret_word, chosen_letters), front = ("Arial", 40))
+    word_display = Label(root, text="the")
+
     word_display.pack(pady = (350, 0), padx = 100, side = LEFT)
-    chosen_letters += handle_guess(secret_word)
+    chosen_letters += handle_guess(secret_word, chosen_letters)
     game_over = game_status(secret_word, chosen_letters)
 
 root = Tk()
@@ -126,12 +122,12 @@ def init_GUI():
   title = Label(frame, text = "HANGMAN", font = ("Arial", 40))
   title.pack(pady = 100)
 
-  default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main_default)
-  default.pack(pady = (350, 0), padx = 100, side = LEFT)
+  # default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main_default)
+  # default.pack(pady = (350, 0), padx = 100, side = LEFT)
 
   timed = Button(frame, text = "TIMED", font = ("Arial", 24), command=main_timed)
   timed.pack(pady = (350, 0), padx = 100, side = LEFT)
 
 init_GUI()
-
+root.bind("<Return>", handle_guess("the", "b"))
 root.mainloop()
