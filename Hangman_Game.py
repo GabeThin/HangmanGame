@@ -97,10 +97,12 @@ def timed_GUI():
   secret_word = "the"
   submit = Button(frame, text = "Submit Guess", font = ("Arial", 24), command=check_guess())
   submit.pack(pady = (350, 0), padx = 100, side = LEFT)
+  def check_guess():
+    letter = guess.get()
+    return letter
   
   
-def check_guess():
-  letter = guess.get()
+
 
 def main_timed():
   for i in root.winfo_children():
