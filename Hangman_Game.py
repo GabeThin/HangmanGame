@@ -34,6 +34,7 @@ def handle_guess():
             blanks = Label(root, textvariable=display)
             blanks.pack(padx=(100, 0), side=LEFT)
             display.set(display_word(secret_word, chosen_letters))
+            desplay.destroy()
         else:
             print("incorrect")
 
@@ -121,7 +122,7 @@ def main_timed():
     submit.pack(side=LEFT)
 
     while game_over == False:
-        # display_word(secret_word, chosen_letters)
+      #display_word(secret_word, chosen_letters)
       chosen_letters += handle_guess()
       game_over = game_status(secret_word, chosen_letters)
 
