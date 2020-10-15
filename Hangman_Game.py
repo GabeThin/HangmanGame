@@ -141,7 +141,7 @@ def init_GUI():
 
 
 #HEAD
-main()
+main_timed()
 #=========
 init_GUI()
 root.mainloop()
