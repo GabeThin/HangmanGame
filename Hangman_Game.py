@@ -6,7 +6,7 @@ correct = False
 def choose_word():
     words = open("words.txt").readlines()
     myword = random.choice(words)
-    return myword
+    return "the"
 
 
 def display_word(word, chosen):
