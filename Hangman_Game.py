@@ -34,17 +34,18 @@ def handle_guess():
             blanks = Label(root, textvariable=display)
             blanks.pack(padx=(100, 0), side=LEFT)
             display.set(display_word(secret_word, chosen_letters))
-            blanks.destroy()
+            
             
         else:
             print("incorrect")
+        return letter[0]
 
     else:
         print("You can only guess one letter at a time")
-    return letter[0]
+
 
 def clear_display():
-    pass
+    blanks.destroy()
 
 
 def game_status(word, chosen):
