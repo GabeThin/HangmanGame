@@ -130,8 +130,8 @@ def main_timed():
 
     while game_over == False:
         if next_round==True:
-            guess.destroy()
-            submit.destroy()
+#             guess.destroy()
+#             submit.destroy()
             chosen_letters += handle_guess()
             game_over = game_status(secret_word, chosen_letters)
 
