@@ -47,8 +47,8 @@ def handle_guess():
         print("You can only guess one letter at a time")
 
 
-def clear_display():
-    blanks.destroy()
+# def clear_display():
+#     blanks.destroy()
 
 
 def game_status(word, chosen):
@@ -123,7 +123,7 @@ def main_timed():
             global guess
             guess = Entry(root)
             guess.pack(side=LEFT)
-            submit = Button(root, text="Submit Guess", font=("Arial", 24), command=lambda:[handle_guess(), clear_display()])
+            submit = Button(root, text="Submit Guess", font=("Arial", 24), command=handle_guess)
             submit.pack(side=LEFT)
             chosen_letters += handle_guess()
             game_over = game_status(secret_word, chosen_letters)
