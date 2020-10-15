@@ -106,6 +106,7 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
+    print(next_round)
     game_over = False
     global chosen_letters
     global secret_word
