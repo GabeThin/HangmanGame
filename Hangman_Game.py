@@ -32,20 +32,15 @@ def handle_guess():
     if len(letter) == 1:
         if letter in word:
             print("correct")
-            display = StringVar()
-            blanks = Label(root, textvariable=display)
-            blanks.pack(padx=(100, 0), side=LEFT)
-            display.set(display_word(secret_word, chosen_letters))
-            
-            
         else:
             print("incorrect")
-        next_round= False
-        
-
+        display = StringVar()
+        blanks = Label(root, textvariable=display)
+        blanks.pack(padx=(100, 0), side=LEFT)
+        display.set(display_word(secret_word, chosen_letters))
+        return letter
     else:
         print("You can only guess one letter at a time")
-    return letter[0]
 
 
 # def clear_display():
