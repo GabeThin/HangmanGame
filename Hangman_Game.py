@@ -94,20 +94,33 @@ def show_hangman(wrongCounter):
   else:
     print("      |")
 
-def main():
+def main_default():
   for i in root.winfo_children():
     i.destroy()
   game_over = False
-  # secret_word = choose_word()
+  secret_word = choose_word()
   secret_word = "the"
   chosen_letters = ""
   while game_over == False:
     print(display_word(secret_word, chosen_letters))
     chosen_letters += handle_guess(secret_word)
     game_over = game_status(secret_word, chosen_letters)
+    
+def main_timed():
+  for i in root.winfo_children():
+    i.destroy()
+  game_over = False
+  secret_word = choose_word()
+  chosen_letters = ""
+  while game_over == False:
+    text.insert (INSERT, display_word(secret_word, chosen_letters))
+    text.pack
+    chosen_letters += handle_guess(secret_word)
+    game_over = game_status(secret_word, chosen_letters)
 
 root = Tk()
 root.geometry("1440x900")
+text = Text(root)
 frame = Frame(root)
 frame.pack()
 
@@ -115,10 +128,10 @@ def init_GUI():
   title = Label(frame, text = "HANGMAN", font = ("Arial", 40))
   title.pack(pady = 100)
 
-  default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main)
+  default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main_default)
   default.pack(pady = (350, 0), padx = 100, side = LEFT)
 
-  timed = Button(frame, text = "TIMED", font = ("Arial", 24), command=main)
+  timed = Button(frame, text = "TIMED", font = ("Arial", 24), command=main_timed)
   timed.pack(pady = (350, 0), padx = 100, side = LEFT)
 
 init_GUI()
