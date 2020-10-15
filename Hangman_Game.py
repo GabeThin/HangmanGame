@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 
+next_round = False
 correct = False
 
 def choose_word():
@@ -38,6 +39,7 @@ def handle_guess():
             
         else:
             print("incorrect")
+        next_round= True
         return letter[0]
 
     else:
@@ -127,9 +129,11 @@ def main_timed():
     submit.pack(side=LEFT)
 
     while game_over == False:
-      #display_word(secret_word, chosen_letters)
-      chosen_letters += handle_guess()
-      game_over = game_status(secret_word, chosen_letters)
+        if next_round==True:
+            guess.destroy()
+            submit.destroy()
+            chosen_letters += handle_guess()
+            game_over = game_status(secret_word, chosen_letters)
 
 
 root = Tk()
