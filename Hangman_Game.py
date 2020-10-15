@@ -95,9 +95,10 @@ def timed_GUI():
   guess = Entry(root)
   guess.pack(side=LEFT)
   secret_word = "the"
-  submit = Button(frame, text = "Submit Guess", font = ("Arial", 24), command=check_guess())
+  submit = Button(frame, text = "Submit Guess", font = ("Arial", 24), command=check_guess(guess))
   submit.pack(pady = (350, 0), padx = 100, side = LEFT)
-  def check_guess():
+ 
+def check_guess():
     letter = guess.get()
     return letter
   
