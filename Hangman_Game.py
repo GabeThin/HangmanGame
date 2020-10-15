@@ -123,34 +123,14 @@ def main_timed():
             guess.pack(side=LEFT)
             submit = Button(root, text="Submit Guess", font=("Arial", 24), command=lambda:[handle_guess(), clear_display()])
             submit.pack(side=LEFT)
+            chosen_letters += handle_guess()
+            game_over = game_status(secret_word, chosen_letters)
         else:
             for i in root.winfo_children():
                 i.destroy()
-            next_round==True:
-
-
-    
-
-    
-    
-
-    
-    
-    
-
-
-  
-
-    
-)
-
-
-#             guess.destroy()
-#             submit.destroy()
-            chosen_letters += handle_guess()
-            game_over = game_status(secret_word, chosen_letters)
-
-
+            next_round= True
+           
+        
 root = Tk()
 root.geometry("1440x900")
 frame = Frame(root)
