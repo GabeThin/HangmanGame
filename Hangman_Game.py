@@ -36,7 +36,7 @@ def handle_guess(word):
     else:
       print("incorrect")
       print("")
-    
+
   else:
     print("You can only guess one letter at a time")
 
@@ -107,4 +107,4 @@ def main():
     chosen_letters += handle_guess(secret_word)
     game_over = game_status(secret_word, chosen_letters)
 
-main() 
+main()
