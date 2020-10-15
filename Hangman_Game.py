@@ -11,7 +11,7 @@ def choose_word():
 
 def display_word(word, chosen):
     # show the word in its current state including blanks for letters not chosen.
-    display_string = ""
+    display_string = StringVar()
 
     for i in range(0, len(word)):
         if (word[i] in chosen):
