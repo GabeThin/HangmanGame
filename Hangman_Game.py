@@ -27,6 +27,7 @@ def display_word(word, chosen):
 def handle_guess():
     # get the guess, update chosen, give feedback to user such as -- you are correct
     letter = guess.get()
+    print (letter)
     word = secret_word
 
     if len(letter) == 1:
