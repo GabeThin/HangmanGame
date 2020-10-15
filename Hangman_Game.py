@@ -118,7 +118,7 @@ def init_GUI():
   default = Button(frame, text = "DEFAULT", font = ("Arial", 24), command=main)
   default.pack(pady = (350, 0), padx = 100, side = LEFT)
 
-  timed = Button(frame, text = "TIMED", font = ("Arial", 24))
+  timed = Button(frame, text = "TIMED", font = ("Arial", 24), command=main)
   timed.pack(pady = (350, 0), padx = 100, side = LEFT)
 
 init_GUI()
