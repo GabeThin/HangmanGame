@@ -126,7 +126,7 @@ def main_timed():
             game_over = game_status(secret_word, chosen_letters)
             next_round = False
         else:
-            widget_list = all_children(window)
+            widget_list = all_children(root)
             for item in widget_list:
                 item.pack_forget()
             next_round= True
