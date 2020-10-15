@@ -140,9 +140,9 @@ def init_GUI():
     timed.pack(pady=(350, 0), padx=100, side=LEFT)
 
 
-<<<<<<< HEAD
+#HEAD
 main()
-=======
+#=========
 init_GUI()
 root.mainloop()
->>>>>>> c23a96fb9dba2587fe350abfede0c6e86132768c
+#c23a96fb9dba2587fe350abfede0c6e86132768c
