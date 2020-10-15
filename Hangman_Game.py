@@ -1,7 +1,7 @@
 from tkinter import *
 import random
 
-next_round = False
+next_round = True
 correct = False
 
 def choose_word():
@@ -10,7 +10,7 @@ def choose_word():
     return "the"
 
 
-def display_word(word, chosen):
+def display_word(word, chosen):blanks.destroy()
     # show the word in its current state including blanks for letters not chosen.
     display_string = ""
 
@@ -39,7 +39,7 @@ def handle_guess():
             
         else:
             print("incorrect")
-        next_round= True
+        next_round= False
         return letter[0]
 
     else:
@@ -105,31 +105,45 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-    for i in root.winfo_children():
-        i.destroy()
-
     game_over = False
-
     global chosen_letters
-    chosen_letters = ""
-
     global secret_word
-
     secret_word = choose_word()
-    guess_text = Label(root, text="enter letter guess:")
-    guess_text.pack(padx=(100, 0), side=LEFT)
-
-    global guess
-
-    guess = Entry(root)
-
-    guess.pack(side=LEFT)
-
-    submit = Button(root, text="Submit Guess", font=("Arial", 24), command=lambda:[handle_guess(), clear_display()])
-    submit.pack(side=LEFT)
-
+    for i in root.winfo_children():
+            i.destroy()
+    chosen_letters = ""
     while game_over == False:
+  
         if next_round==True:
+            guess_text = Label(root, text="enter letter guess:")
+            guess_text.pack(padx=(100, 0), side=LEFT)
+            global guess
+            guess = Entry(root)
+            guess.pack(side=LEFT)
+            submit = Button(root, text="Submit Guess", font=("Arial", 24), command=lambda:[handle_guess(), clear_display()])
+            submit.pack(side=LEFT)
+        else:
+            for i in root.winfo_children():
+                i.destroy()
+            next_round==True:
+
+
+    
+
+    
+    
+
+    
+    
+    
+
+
+  
+
+    
+)
+
+
 #             guess.destroy()
 #             submit.destroy()
             chosen_letters += handle_guess()
