@@ -111,6 +111,14 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
+
+    for i in root.winfo_children():
+        i.destroy()
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
+    title.grid(row = 0, columnspan=3, pady=50, padx=50)
+    print(next_round)
+
+
     game_over = False
 
     global chosen_letters
@@ -118,40 +126,40 @@ def main_timed():
 
     secret_word = choose_word()
 
+    
+    while game_over == False:
+       guess_text = Label(root, text="enter letter guess:")
+       display_string = ""
+       guess_text.grid(root, row = 3)
+        
+       global guess
+       global display
+       global blanks
+      
+       guess = Entry(root)
+       guess.grid(root, row = 3)
+      
+       display = StringVar()
+       blanks = Label(root, textvariable=display)
+      
+       submit = Button(root, text="Submit Guess", font=("Arial", 24))
+       submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
+       submit.pack(root, row = 3)
+       
+       chosen_letters += handle_guess(chosen_letters, display_string)
+       game_over = game_status(secret_word, chosen_letters)
+       
+
+
     for i in root.winfo_children():
             i.destroy()
 
-    while game_over == False:
-        guess_text = Label(root, text="enter letter guess:")
-        display_string = ""
-        guess_text.pack(padx=(100, 0), side=LEFT)
-
-        global guess
-        guess = Entry(root)
-        guess.pack(side=LEFT)
-
-        global blanks
-        global display
-
-        display = StringVar()
-        blanks = Label(root, textvariable=display)
-
-        submit = Button(root, text="Submit Guess", font=("Arial", 24))
-        submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-        submit.pack(side=LEFT)
-
-        letter, chosen = handle_guess(chosen_letters, display_string)
-
-        print(chosen)
-
-        chosen_letters += handle_guess(chosen, display_string)
-        game_over = game_status(secret_word, chosen_letters)
-
-
 root = Tk()
 root.geometry("1440x900")
-frame = Frame(root)
-frame.pack()
+# frame = Frame(root, background = "yellow", bd = 2, )
+# frame.grid()
+
+
 
 def all_widgets (window) :
     widget_list = window.winfo_children()
@@ -160,15 +168,13 @@ def all_widgets (window) :
             _list.extend(item.winfo_children())
     return _list
 
-def delete_click():
-    return "yes"
+
 
 def init_GUI():
-    title = Label(root, text="HANGMAN", font=("Arial", 40))
-    title.pack(pady=100)
-
-    play = Button(root, text="PLAY", font=("Arial", 24), command=main_timed)
-    play.pack(pady = (350, 0))
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
+    title.grid(row = 0, columnspan=3, pady=50, padx=50)
+    timed = Button(root, bd = 5, text="START", font=("Helvetica", 50), bg="red",command=main_timed)
+    timed.grid(row = 2, columnspan=3)
 
 init_GUI()
 root.mainloop()
