@@ -144,13 +144,22 @@ def all_widgets (window) :
             _list.extend(item.winfo_children())
     return _list
 
+def delete_click():
+    return "yes"
 
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("Arial", 40))
     title.pack(pady=100)
+    
+    deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
+    deletebutton.pack(side=LEFT)
+    if delete_click() == yes:
+        for i in root.winfo_children():
+            i.destroy()
 
-    timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
-    timed.pack(pady=(350, 0), padx=100, side=LEFT)
+    #timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
+    #timed.pack(pady=(350, 0), padx=100, side=LEFT)
+    
 
 
 #HEAD
