@@ -112,7 +112,7 @@ def show_hangman(wrongCounter):
 def main_timed():
     for i in root.winfo_children():
         i.destroy()
-    title = Label(frame, text="HANGMAN", font=("HELVETICA", 120))
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=50)
     print(next_round)
     game_over = False
@@ -124,13 +124,13 @@ def main_timed():
     while game_over == False:
        guess_text = Label(root, text="enter letter guess:")
        display_string = ""
-       guess_text.grid(frame, row = 3)
+       guess_text.grid(root, row = 3)
        global guess
        guess = Entry(root)
-       guess.grid(frame, row = 3)
+       guess.grid(root, row = 3)
        submit = Button(root, text="Submit Guess", font=("Arial", 24))
        submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-       submit.pack(frame, row = 3)
+       submit.pack(root, row = 3)
        chosen_letters += handle_guess(chosen_letters, display_string)
        game_over = game_status(secret_word, chosen_letters)
        
@@ -139,16 +139,16 @@ def main_timed():
 
 root = Tk()
 root.geometry("1440x900")
-frame = Frame(root, background = "yellow", bd = 2, padx=root.width)
-frame.grid()
+# frame = Frame(root, background = "yellow", bd = 2, )
+# frame.grid()
 
 
 
 
 def init_GUI():
-    title = Label(frame, text="HANGMAN", font=("HELVETICA", 120))
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=50)
-    timed = Button(frame, bd = 5, text="START", font=("Helvetica", 50), bg="red",command=main_timed)
+    timed = Button(root, bd = 5, text="START", font=("Helvetica", 50), bg="red",command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
 
