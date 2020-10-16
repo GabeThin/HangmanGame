@@ -1,6 +1,8 @@
 from tkinter import *
 import random
 
+chosen_letters = ""
+
 correct = False
 incorrect = False
 
@@ -9,17 +11,16 @@ def choose_word():
     myword = random.choice(words)
     return "the"
 
-def display_word(word, chosen):
-    display_string = ""
-
-    for i in range(0, len(word)):
-        if (word[i] in chosen):
-            display_string += word[i] + " "
-        else:
-            display_string += "_ "
-
-    return display_string
-
+# def display_word(word, chosen):
+#     display_string = ""
+#
+#     for i in range(0, len(word)):
+#         if (word[i] in chosen):
+#             display_string += word[i] + " "
+#         else:
+#             display_string += "_ "
+#
+#     return display_string
 
 def handle_guess(chosen, display_string):
     # get the guess, update chosen, give feedback to user such as -- you are correct
@@ -28,12 +29,19 @@ def handle_guess(chosen, display_string):
     letter = guess.get()
 
     if len(letter) == 1:
+
         if letter in word:
             print("correct")
             chosen += letter[0]
 
+            guess.delete(0, END)
+
+            blanks.pack_forget()
+            blanks.pack(padx=(100, 0), side=LEFT)
+
         else:
             print("incorrect")
+            guess.delete(0, END)
 
         for i in range(0, len(word)):
             if (word[i] in chosen):
@@ -41,16 +49,12 @@ def handle_guess(chosen, display_string):
             else:
                 display_string += "_ "
 
+        display.set(display_string)
+
     else:
         print("You can only guess one letter at a time")
-    blanks = Label(root, text=display_string)
-    blanks.pack(padx=(100, 0), side=LEFT)
 
-
-
-    print(display_string)
-
-    return letter[0], display_string()
+    return letter[0], chosen
 
 def game_status(word, chosen):
     # show graphics & chosen letters
@@ -107,36 +111,41 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-    next_round = True
-    print(next_round)
     game_over = False
+
     global chosen_letters
     global secret_word
+
     secret_word = choose_word()
+
     for i in root.winfo_children():
             i.destroy()
-    chosen_letters = ""
+
     while game_over == False:
+        guess_text = Label(root, text="enter letter guess:")
+        display_string = ""
+        guess_text.pack(padx=(100, 0), side=LEFT)
 
-        if next_round==True:
-            guess_text = Label(root, text="enter letter guess:")
-            display_string = ""
-            guess_text.pack(padx=(100, 0), side=LEFT)
-            global guess
-            guess = Entry(root)
-            guess.pack(side=LEFT)
-            submit = Button(root, text="Submit Guess", font=("Arial", 24))
-            submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-            submit.pack(side=LEFT)
+        global guess
+        guess = Entry(root)
+        guess.pack(side=LEFT)
 
-            chosen_letters += handle_guess(chosen_letters, display_string)
-            game_over = game_status(secret_word, chosen_letters)
-            next_round = False
-        else:
-            widget_list = all_children(root)
-            for item in widget_list:
-                item.pack_forget()
-            next_round= True
+        global blanks
+        global display
+
+        display = StringVar()
+        blanks = Label(root, textvariable=display)
+
+        submit = Button(root, text="Submit Guess", font=("Arial", 24))
+        submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
+        submit.pack(side=LEFT)
+
+        letter, chosen = handle_guess(chosen_letters, display_string)
+
+        print(chosen)
+
+        chosen_letters += handle_guess(chosen, display_string)
+        game_over = game_status(secret_word, chosen_letters)
 
 
 root = Tk()
@@ -146,7 +155,7 @@ frame.pack()
 
 def all_widgets (window) :
     widget_list = window.winfo_children()
-    for item in widget_list :
+    for item in widget_list:
         if item.winfo_children():
             _list.extend(item.winfo_children())
     return _list
