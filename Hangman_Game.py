@@ -56,8 +56,6 @@ def handle_guess(chosen, display_string):
 
     return letter[0]
 
-
-
 def game_status(word, chosen):
     # show graphics & chosen letters
     wrongCounter = 0
@@ -162,7 +160,7 @@ def delete_click():
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("Arial", 40))
     title.pack(pady=100)
-    
+
     deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
     deletebutton.pack(side=LEFT)
     if delete_click() == "yes":
@@ -171,7 +169,7 @@ def init_GUI():
 
     #timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
     #timed.pack(pady=(350, 0), padx=100, side=LEFT)
-    
+
 
 
 #HEAD
