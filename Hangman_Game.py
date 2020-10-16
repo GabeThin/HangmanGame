@@ -138,7 +138,7 @@ def main_timed():
 root = Tk()
 root.geometry("1440x900")
 frame = Frame(root)
-frame.grid()
+frame.pack()
 
 
 
