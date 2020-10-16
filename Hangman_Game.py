@@ -149,7 +149,7 @@ def init_GUI():
     ready = Label(frame, text="Ready to play", font=("Arial", 20))
     ready.grid(row = 5, column = 2)
     timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
-    timed.grid(pady=(350, 0), padx=100, side=LEFT)
+    timed.grid(row = 6, column = 2)
 
 
 
