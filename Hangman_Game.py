@@ -10,7 +10,6 @@ def choose_word():
     myword = random.choice(words)
     return "the"
 
-
 def display_word(word, chosen):
     #blanks.destroy()
     # show the word in its current state including blanks for letters not chosen.
