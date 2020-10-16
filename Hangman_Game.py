@@ -54,7 +54,7 @@ def handle_guess(chosen, display_string):
 
 
 
-    print(display_string)
+    print(blanks_content)
 
     return letter[0]
 
