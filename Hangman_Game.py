@@ -120,25 +120,37 @@ def main_timed():
             i.destroy()
     chosen_letters = ""
     while game_over == False:
-
-        if next_round==True:
-            guess_text = Label(root, text="enter letter guess:")
-            display_string = ""
-            guess_text.pack(padx=(100, 0), side=LEFT)
-            global guess
-            guess = Entry(root)
-            guess.pack(side=LEFT)
-            submit = Button(root, text="Submit Guess", font=("Arial", 24))
-            submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-            submit.pack(side=LEFT)
-            chosen_letters += handle_guess(chosen_letters, display_string)
-            game_over = game_status(secret_word, chosen_letters)
-            next_round = False
-        else:
-            widget_list = all_children(root)
-            for item in widget_list:
-                item.pack_forget()
-            next_round= True
+        guess_text = Label(root, text="enter letter guess:")
+        display_string = ""
+        guess_text.pack(padx=(100, 0), side=LEFT)
+        global guess
+        guess = Entry(root)
+        guess.pack(side=LEFT)
+        submit = Button(root, text="Submit Guess", font=("Arial", 24))
+        submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
+        submit.pack(side=LEFT)
+        chosen_letters += handle_guess(chosen_letters, display_string)
+         game_over = game_status(secret_word, chosen_letters)
+       
+        
+#         if next_round==True:
+#             guess_text = Label(root, text="enter letter guess:")
+#             display_string = ""
+#             guess_text.pack(padx=(100, 0), side=LEFT)
+#             global guess
+#             guess = Entry(root)
+#             guess.pack(side=LEFT)
+#             submit = Button(root, text="Submit Guess", font=("Arial", 24))
+#             submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
+#             submit.pack(side=LEFT)
+#             chosen_letters += handle_guess(chosen_letters, display_string)
+#             game_over = game_status(secret_word, chosen_letters)
+#             next_round = False
+#         else:
+#             widget_list = all_children(root)
+#             for item in widget_list:
+#                 item.pack_forget()
+#             next_round= True
 
 
 root = Tk()
@@ -146,25 +158,25 @@ root.geometry("1440x900")
 frame = Frame(root)
 frame.pack()
 
-def all_widgets (window) :
-    widget_list = window.winfo_children()
-    for item in widget_list :
-        if item.winfo_children():
-            _list.extend(item.winfo_children())
-    return _list
+# def all_widgets (window) :
+#     widget_list = window.winfo_children()
+#     for item in widget_list :
+#         if item.winfo_children():
+#             _list.extend(item.winfo_children())
+#     return _list
 
-def delete_click():
-    return "yes"
+# def delete_click():
+#     return "yes"
 
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("Arial", 40))
     title.pack(pady=100)
 
-    deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
-    deletebutton.pack(side=LEFT)
-    if delete_click() == "yes":
-        for i in root.winfo_children():
-            i.destroy()
+#     deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
+#     deletebutton.pack(side=LEFT)
+#     if delete_click() == "yes":
+#         for i in root.winfo_children():
+#             i.destroy()
 
     timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
     timed.pack(pady=(350, 0), padx=100, side=LEFT)
