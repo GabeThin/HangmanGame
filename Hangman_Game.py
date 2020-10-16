@@ -166,8 +166,8 @@ def init_GUI():
         for i in root.winfo_children():
             i.destroy()
 
-    #timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
-    #timed.pack(pady=(350, 0), padx=100, side=LEFT)
+    timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
+    timed.pack(pady=(350, 0), padx=100, side=LEFT)
 
 
 
