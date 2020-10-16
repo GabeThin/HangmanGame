@@ -1,16 +1,18 @@
 from tkinter import *
 import random
 
+
 correct = False
 incorrect = False
 
 def choose_word():
     words = open("words.txt").readlines()
     myword = random.choice(words)
-    return myword
+    return "the"
 
 
 def display_word(word, chosen):
+    #blanks.destroy()
     # show the word in its current state including blanks for letters not chosen.
     display_string = ""
 
@@ -23,32 +25,40 @@ def display_word(word, chosen):
     return display_string
 
 
-def handle_guess():
+def handle_guess(chosen, display_string):
     # get the guess, update chosen, give feedback to user such as -- you are correct
-    letter = guess.get()
-    word = secret_word
 
-    blanks = Label(root, text=display_word(secret_word, chosen_letters))
-    blanks.pack(padx=(100, 0), side=LEFT)
+    word = secret_word
+    letter = guess.get()
 
     if len(letter) == 1:
         if letter in word:
             print("correct")
-            correct = True
-            blanks.destroy()
+            chosen += letter[0]
 
         else:
             print("incorrect")
-            blanks.destroy()
+
+        for i in range(0, len(word)):
+            if (word[i] in chosen):
+                display_string += word[i] + " "
+            else:
+                display_string += "_ "
 
     else:
         print("You can only guess one letter at a time")
+    blanks = Label(root, text=display_string)
+    blanks.pack(padx=(100, 0), side=LEFT)
 
 
 
-    game_over = game_status(secret_word, chosen_letters)
+    print(display_string)
 
     return letter[0]
+
+
+# def clear_display():
+#     blanks.destroy()
 
 
 
@@ -107,40 +117,48 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-    for i in root.winfo_children():
-        i.destroy()
-
+    next_round = True
+    print(next_round)
     game_over = False
-
     global chosen_letters
-    chosen_letters = ""
-
     global secret_word
-
     secret_word = choose_word()
-    guess_text = Label(root, text="Enter letter guess:")
-    guess_text.pack(padx=(100, 0), side=LEFT)
-
-    global guess
-
-    guess = Entry(root)
-
-    guess.pack(side=LEFT)
-
-    submit = Button(root, text="Submit Guess", font=("Arial", 24), command=handle_guess)
-    submit.pack(side=LEFT)
-
+    for i in root.winfo_children():
+            i.destroy()
+    chosen_letters = ""
     while game_over == False:
-      chosen_letters += handle_guess()
-      if correct == True:
-        blanks = Label(root, text=display_word(secret_word, chosen_letters))
-        blanks.pack(padx=(100, 0), side=LEFT)
+
+        if next_round==True:
+            guess_text = Label(root, text="enter letter guess:")
+            display_string = ""
+            guess_text.pack(padx=(100, 0), side=LEFT)
+            global guess
+            guess = Entry(root)
+            guess.pack(side=LEFT)
+            submit = Button(root, text="Submit Guess", font=("Arial", 24))
+            submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
+            submit.pack(side=LEFT)
+            chosen_letters += handle_guess(chosen_letters, display_string)
+            game_over = game_status(secret_word, chosen_letters)
+            next_round = False
+        else:
+            widget_list = all_children(root)
+            for item in widget_list:
+                item.pack_forget()
+            next_round= True
 
 
 root = Tk()
 root.geometry("1440x900")
 frame = Frame(root)
 frame.pack()
+
+def all_widgets (window) :
+    widget_list = window.winfo_children()
+    for item in widget_list :
+        if item.winfo_children():
+            _list.extend(item.winfo_children())
+    return _list
 
 
 def init_GUI():
@@ -151,5 +169,9 @@ def init_GUI():
     timed.pack(pady=(350, 0), padx=100, side=LEFT)
 
 
+#HEAD
+# main_timed()
+#=========
 init_GUI()
 root.mainloop()
+#c23a96fb9dba2587fe350abfede0c6e86132768c
