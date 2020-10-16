@@ -15,10 +15,10 @@ def display_word(word, chosen):
     #blanks.destroy()
     # show the word in its current state including blanks for letters not chosen.
     display_string = ""
-
+    blanks = "_ _ _ "
     for i in range(0, len(word)):
         if (word[i] in chosen):
-            display_string += word[i] + " "
+            blanks.replace
         else:
             display_string += "_ "
 
