@@ -153,7 +153,7 @@ def init_GUI():
     
     deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
     deletebutton.pack(side=LEFT)
-    if delete_click() == yes:
+    if delete_click() == "yes":
         for i in root.winfo_children():
             i.destroy()
 
