@@ -146,7 +146,7 @@ frame.grid()
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=50)
-    timed = Button(frame, text="START", height =2, font=("Helvetica", 50), fg="red",command=main_timed)
+    timed = Button(frame, bd = 5, text="START", height =2, font=("Helvetica", 50), fg="red",command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
 
