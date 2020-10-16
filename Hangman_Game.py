@@ -110,25 +110,27 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-    timed.destroy()
+    for i in root.winfo_children():
+        i.destroy()
+    title = Label(frame, text="HANGMAN", font=("HELVETICA", 120))
+    title.grid(row = 0, columnspan=3, pady=50, padx=50)
     print(next_round)
     game_over = False
     global chosen_letters
     global secret_word
     secret_word = choose_word()
-#     for i in root.winfo_children():
-#             i.destroy()
+    
     chosen_letters = ""
     while game_over == False:
        guess_text = Label(root, text="enter letter guess:")
        display_string = ""
-       guess_text.pack(padx=(100, 0), side=LEFT)
+       guess_text.grid(frame, row = 3)
        global guess
        guess = Entry(root)
-       guess.pack(side=LEFT)
+       guess.grid(frame, row = 3)
        submit = Button(root, text="Submit Guess", font=("Arial", 24))
        submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-       submit.pack(side=LEFT)
+       submit.pack(frame, row = 3)
        chosen_letters += handle_guess(chosen_letters, display_string)
        game_over = game_status(secret_word, chosen_letters)
        
@@ -137,7 +139,7 @@ def main_timed():
 
 root = Tk()
 root.geometry("1440x900")
-frame = Frame(root)
+frame = Frame(root, background = "yellow", bd = 2)
 frame.pack()
 
 
