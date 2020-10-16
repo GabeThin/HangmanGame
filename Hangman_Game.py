@@ -158,7 +158,9 @@ def delete_click():
 
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("Arial", 40))
-    title.pack(pady=100)
+    title.grid(columnspan=5)
+    title2 = Label(frame, text="HANGMAN", font=("Arial", 40))
+    title.grid(row=2, columnspan=5)
 
     deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
     deletebutton.pack(side=LEFT)
