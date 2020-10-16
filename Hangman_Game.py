@@ -130,7 +130,7 @@ def main_timed():
         submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
         submit.pack(side=LEFT)
         chosen_letters += handle_guess(chosen_letters, display_string)
-         game_over = game_status(secret_word, chosen_letters)
+        game_over = game_status(secret_word, chosen_letters)
        
         
 #         if next_round==True:
