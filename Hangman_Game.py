@@ -2,6 +2,7 @@ from tkinter import *
 import random
 
 correct = False
+incorrect = False
 
 def choose_word():
     words = open("words.txt").readlines()
@@ -27,19 +28,28 @@ def handle_guess():
     letter = guess.get()
     word = secret_word
 
+    blanks = Label(root, text=display_word(secret_word, chosen_letters))
+    blanks.pack(padx=(100, 0), side=LEFT)
+
     if len(letter) == 1:
         if letter in word:
             print("correct")
-
-            blanks = Label(root, text=display_word(secret_word, chosen_letters))
-            blanks.pack(padx=(100, 0), side=LEFT)
+            correct = True
+            blanks.destroy()
 
         else:
             print("incorrect")
+            blanks.destroy()
 
     else:
         print("You can only guess one letter at a time")
+
+
+
+    game_over = game_status(secret_word, chosen_letters)
+
     return letter[0]
+
 
 
 def game_status(word, chosen):
@@ -108,7 +118,7 @@ def main_timed():
     global secret_word
 
     secret_word = choose_word()
-    guess_text = Label(root, text="enter letter guess:")
+    guess_text = Label(root, text="Enter letter guess:")
     guess_text.pack(padx=(100, 0), side=LEFT)
 
     global guess
@@ -121,9 +131,10 @@ def main_timed():
     submit.pack(side=LEFT)
 
     while game_over == False:
-        # display_word(secret_word, chosen_letters)
       chosen_letters += handle_guess()
-      game_over = game_status(secret_word, chosen_letters)
+      if correct == True:
+        blanks = Label(root, text=display_word(secret_word, chosen_letters))
+        blanks.pack(padx=(100, 0), side=LEFT)
 
 
 root = Tk()
@@ -140,9 +151,5 @@ def init_GUI():
     timed.pack(pady=(350, 0), padx=100, side=LEFT)
 
 
-<<<<<<< HEAD
-main()
-=======
 init_GUI()
 root.mainloop()
->>>>>>> c23a96fb9dba2587fe350abfede0c6e86132768c
