@@ -145,12 +145,11 @@ frame.pack()
 
 def init_GUI():
     title = Label(frame, text="HANGMAN", font=("Arial", 40))
-    title.grid(row = 1, columnspan = 5)
+    title.grid(row = 0, column)
     ready = Label(frame, text="Ready to play", font=("Arial", 20))
     ready.grid(row = 5, column = 2)
-
-    #timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
-    #timed.pack(pady=(350, 0), padx=100, side=LEFT)
+    timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
+    timed.grid(pady=(350, 0), padx=100, side=LEFT)
 
 
 
