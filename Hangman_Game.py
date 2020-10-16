@@ -57,10 +57,6 @@ def handle_guess(chosen, display_string):
     return letter[0]
 
 
-# def clear_display():
-#     blanks.destroy()
-
-
 
 def game_status(word, chosen):
     # show graphics & chosen letters
