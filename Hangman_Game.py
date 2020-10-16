@@ -48,7 +48,7 @@ def handle_guess(chosen, display_string):
 
     else:
         print("You can only guess one letter at a time")
-    display_strint.set(blanks_content)
+    display_string.set(blanks_content)
     blanks = Label(display_string.root, textvariable=display_string)
     blanks.pack(padx=(100, 0), side=LEFT)
 
