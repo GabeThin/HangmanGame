@@ -110,14 +110,14 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-    next_round = True
+    timed.destroy()
     print(next_round)
     game_over = False
     global chosen_letters
     global secret_word
     secret_word = choose_word()
-    for i in root.winfo_children():
-            i.destroy()
+#     for i in root.winfo_children():
+#             i.destroy()
     chosen_letters = ""
     while game_over == False:
        guess_text = Label(root, text="enter letter guess:")
