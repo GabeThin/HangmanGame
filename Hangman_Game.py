@@ -49,8 +49,6 @@ def handle_guess(chosen, display_string):
     blanks = Label(root, text=display_string)
     blanks.pack(padx=(100, 0), side=LEFT)
 
-
-
     print(display_string)
 
     return letter[0]
