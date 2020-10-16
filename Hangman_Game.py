@@ -30,6 +30,7 @@ def handle_guess(chosen, display_string):
 
     word = secret_word
     letter = guess.get()
+    blanks_content = ""
 
     if len(letter) == 1:
         if letter in word:
@@ -41,13 +42,14 @@ def handle_guess(chosen, display_string):
 
         for i in range(0, len(word)):
             if (word[i] in chosen):
-                display_string += word[i] + " "
+                blanks_content += word[i] + " "
             else:
-                display_string += "_ "
+                blanks_content += "_ "
 
     else:
         print("You can only guess one letter at a time")
-    blanks = Label(root, text=display_string)
+    display_strint.set(blanks_content)
+    blanks = Label(display_string.root, textvariable=display_string)
     blanks.pack(padx=(100, 0), side=LEFT)
 
 
@@ -122,7 +124,8 @@ def main_timed():
     chosen_letters = ""
     while game_over == False:
         guess_text = Label(root, text="enter letter guess:")
-        display_string = ""
+        display_string.root = tk.Tk()
+        display_string = tk.StringVar()
         guess_text.pack(padx=(100, 0), side=LEFT)
         global guess
         guess = Entry(root)
