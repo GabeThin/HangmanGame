@@ -1,6 +1,6 @@
 from tkinter import *
 import random
-#import tkinter as tk
+import tkinter as tk
 
 
 correct = False
@@ -124,8 +124,8 @@ def main_timed():
     chosen_letters = ""
     while game_over == False:
         guess_text = Label(root, text="enter letter guess:")
-        display_string.root = tk.Tk()
         display_string = tk.StringVar()
+        display_string.root = tk.Tk()
         guess_text.pack(padx=(100, 0), side=LEFT)
         global guess
         guess = Entry(root)
