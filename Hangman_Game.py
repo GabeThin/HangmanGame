@@ -1,7 +1,6 @@
 from tkinter import *
 import random
 
-
 correct = False
 incorrect = False
 
@@ -11,8 +10,6 @@ def choose_word():
     return "the"
 
 def display_word(word, chosen):
-    #blanks.destroy()
-    # show the word in its current state including blanks for letters not chosen.
     display_string = ""
 
     for i in range(0, len(word)):
@@ -53,7 +50,7 @@ def handle_guess(chosen, display_string):
 
     print(display_string)
 
-    return letter[0]
+    return letter[0], display_string()
 
 def game_status(word, chosen):
     # show graphics & chosen letters
@@ -131,6 +128,7 @@ def main_timed():
             submit = Button(root, text="Submit Guess", font=("Arial", 24))
             submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
             submit.pack(side=LEFT)
+
             chosen_letters += handle_guess(chosen_letters, display_string)
             game_over = game_status(secret_word, chosen_letters)
             next_round = False
@@ -157,23 +155,11 @@ def delete_click():
     return "yes"
 
 def init_GUI():
-    title = Label(frame, text="HANGMAN", font=("Arial", 40))
+    title = Label(root, text="HANGMAN", font=("Arial", 40))
     title.pack(pady=100)
 
-    deletebutton = Button(root, text="Submit Guess", font=("Arial", 24), command=delete_click)
-    deletebutton.pack(side=LEFT)
-    if delete_click() == "yes":
-        for i in root.winfo_children():
-            i.destroy()
+    play = Button(root, text="PLAY", font=("Arial", 24), command=main_timed)
+    play.pack(pady = (350, 0))
 
-    #timed = Button(frame, text="PLAY", font=("Arial", 24), command=main_timed)
-    #timed.pack(pady=(350, 0), padx=100, side=LEFT)
-
-
-
-#HEAD
-# main_timed()
-#=========
 init_GUI()
 root.mainloop()
-#c23a96fb9dba2587fe350abfede0c6e86132768c
