@@ -1,5 +1,6 @@
 from tkinter import *
 import random
+import tkinter as tk
 
 
 correct = False
