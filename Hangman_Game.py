@@ -14,29 +14,23 @@ def display_word(word):
     return(string)
 
 def handle_guess(label, letter):
-    incorrect = False
     display_string = ""
     for i in range(0, len(secret_word) - 1):
         if letter == secret_word[i]:
             display[i] = letter
-            return False
-
-    if letter not in secret_word:
-        return True
-
     if display_string == secret_word:
         print("You won :)")
     label.configure(text=display)
 
 
-def timer(wrong_counter):
-    time_count = 0
-    time = 6
-    if time_count < 6:
-        print("bruh")
-        start_time = threading.Timer(time, show_hangman(wrong_counter))
-        wrong_counter += 1
-        start_time.start()
+# def timer(wrong_counter):
+#     time_count = 0
+#     time = 6
+#     if time_count < 6:
+#         print("bruh")
+#         start_time = threading.Timer(time, show_hangman(wrong_counter))
+#         wrong_counter += 1
+#         start_time.start()
 
 
 def hangman_draw():
@@ -104,9 +98,6 @@ def main_timed():
 
     wrong_counter = 0
 
-    
-    timer(wrong_counter)
-
     time_count = 0
 
     clear_window()
@@ -128,7 +119,7 @@ def main_timed():
         # global lives
         # lives = 30
         letter = event.char
-        incorrect = handle_guess(blanks, letter)
+        handle_guess(blanks, letter)
 
         # if incorrect == True:
         #     lives -= 1
