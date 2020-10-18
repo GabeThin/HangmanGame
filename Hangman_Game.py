@@ -84,6 +84,9 @@ def main_timed():
     global lives
 
     clear_window()
+    
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
+    title.grid(row = 0, columnspan=3, pady=50, padx=400)
 
     secret_word = choose_word()
     game_over = False
@@ -93,8 +96,15 @@ def main_timed():
     display = display_blanks.split(" ")
     display.remove(display[-1])
 
-    blanks = Label(root, text=display_blanks)
-    blanks.grid(row=4, column=2)
+    space = Frame(root)
+    space.grid(row=2, pady=200)
+    
+    
+    blanks = Label(root, text=display_blanks, font=("HELVETICA", 40))
+    blanks.grid(row=4, column=1, pady = 10, padx=400)
+    
+    press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 20))
+    press_a_key.grid(row=5, column=1, pady=1, padx=400)
 
     # game_over = game_status(secret_word, chosen_letters)
     lives = 10
@@ -123,8 +133,8 @@ def all_widgets (window) :
 
 def init_GUI():
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
-    title.grid(row = 0, columnspan=3, pady=50, padx=50)
-    timed = Button(root, bd = 5, text="START", font=("Helvetica", 50), bg="red",command=main_timed)
+    title.grid(row = 0, columnspan=3, pady=50, padx=400)
+    timed = Button(root, bd = 5, text="START", font=("Helvetica", 20), bg="red",command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
 init_GUI()
