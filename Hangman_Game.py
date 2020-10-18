@@ -49,32 +49,12 @@ def game_status(word, chosen):
     # return boolean of whether the game is over.
 
 def show_hangman(wrongCounter):
-    print("   --- ")
-    if wrongCounter >= 1:
-        print("   O  |")
-    else:
-        print("      |")
-    if wrongCounter >= 2:
-        if wrongCounter >= 3:
-            if wrongCounter >= 4:
-                print("  /|\ |")
-            else:
-                print("  /|  |")
-        else:
-            print("  /   |")
-    else:
-        print("      |")
-    if wrongCounter >= 5:
-        print("   |  |")
-    else:
-        print("      |")
-    if wrongCounter >= 6:
-        if wrongCounter >= 7:
-            print("  / \ |")
-        else:
-            print("  /   |")
-    else:
-        print("      |")
+    hearts_canvas = Canvas(root, width = 300, height = 300)      
+    hearts_canvas.grid(row = 3) 
+    heart = PhotoImage(file="heart.png")      
+    hearts_canvas.create_image(20,20, anchor=NW, image=img)      
+for i in range(15-wrongCounter):
+    
 
 def main_timed():
     global secret_word
