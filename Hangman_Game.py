@@ -48,7 +48,7 @@ def game_status(word, chosen):
     # announce the outcome if the game is over
     # return boolean of whether the game is over.
 
-def show_hearts(wrongCounter):
+def show_hearts():
     hearts_canvas = Canvas(root, width = 300, height = 300)      
     hearts_canvas.grid(row = 3) 
     heart = PhotoImage(file="heart.png")      
