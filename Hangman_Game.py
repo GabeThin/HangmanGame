@@ -25,7 +25,7 @@ def handle_guess(label, letter, lives):
 
 def game_status(word, chosen):
     # show graphics & chosen letters
-    global wrongCounter = 0
+    wrongCounter = 0
     for letter in chosen:
         if letter not in word:
             wrongCounter += 1
