@@ -114,7 +114,7 @@ def main_timed():
 
     for i in root.winfo_children():
         i.destroy()
-    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 60))
     title.grid(row = 0, columnspan=3, pady=50, padx=50)
     print(next_round)
 
