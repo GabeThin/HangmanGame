@@ -1,5 +1,6 @@
 from tkinter import *
 import random
+import threading
 
 def choose_word():
     words = open("words.txt").readlines()
@@ -13,14 +14,33 @@ def display_word(word):
     return(string)
 
 def handle_guess(label, letter):
+    incorrect = False
     display_string = ""
     for i in range(0, len(secret_word) - 1):
         if letter == secret_word[i]:
             display[i] = letter
+            return False
+
+    if letter not in secret_word:
+        return True
 
     if display_string == secret_word:
         print("You won :)")
     label.configure(text=display)
+
+
+def timer(wrong_counter):
+    time_count = 0
+    time = 6
+    if time_count < 6:
+        print("bruh")
+        start_time = threading.Timer(time, show_hangman(wrong_counter))
+        wrong_counter += 1
+        start_time.start()
+
+
+def hangman_draw():
+    print("bruh")
 
 def game_status(word, chosen):
     # show graphics & chosen letters
@@ -46,7 +66,6 @@ def game_status(word, chosen):
         return False
     # announce the outcome if the game is over
     # return boolean of whether the game is over.
-
 
 def show_hangman(wrongCounter):
     print("   --- ")
@@ -81,6 +100,14 @@ def main_timed():
     global display_blanks
     global display
     global blanks
+    global wrong_counter
+
+    wrong_counter = 0
+
+    
+    timer(wrong_counter)
+
+    time_count = 0
 
     clear_window()
 
@@ -98,8 +125,19 @@ def main_timed():
     # game_over = game_status(secret_word, chosen_letters)
 
     def input(event):
+        # global lives
+        # lives = 30
         letter = event.char
-        handle_guess(blanks, letter)
+        incorrect = handle_guess(blanks, letter)
+
+        # if incorrect == True:
+        #     lives -= 1
+        #     lives_string = "Lives: " + str(lives)
+        #     lives_label.configure(text=lives_string)
+        #
+        # lives_string = "Lives: " + str(lives)
+        # lives_label = Label(root, text = lives_string)
+        # lives_label.grid(row=4, column=3)
 
     root.bind("<Key>", input)
 
