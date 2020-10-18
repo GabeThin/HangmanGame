@@ -1,7 +1,7 @@
 from tkinter import *
 import random
 import threading
-import Image
+import image
 
 def choose_word():
     words = open("words.txt").readlines()
