@@ -1,6 +1,7 @@
 from tkinter import *
 import random
 import threading
+from PIL import ImageTk, Image
 
 def choose_word():
     words = open("words.txt").readlines()
