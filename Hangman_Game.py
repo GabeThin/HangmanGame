@@ -1,60 +1,26 @@
 from tkinter import *
 import random
 
-chosen_letters = ""
-
-correct = False
-incorrect = False
-
 def choose_word():
     words = open("words.txt").readlines()
     myword = random.choice(words)
-    return "the"
+    return myword
 
-# def display_word(word, chosen):
-#     display_string = ""
-#
-#     for i in range(0, len(word)):
-#         if (word[i] in chosen):
-#             display_string += word[i] + " "
-#         else:
-#             display_string += "_ "
-#
-#     return display_string
+def display_word(word):
+    string = ""
+    for i in range(0, len(word) - 1):
+        string += "_ "
+    return(string)
 
-def handle_guess(chosen, display_string):
-    # get the guess, update chosen, give feedback to user such as -- you are correct
+def handle_guess(label, letter):
+    display_string = ""
+    for i in range(0, len(secret_word) - 1):
+        if letter == secret_word[i]:
+            display[i] = letter
 
-    word = secret_word
-    letter = guess.get()
-
-    if len(letter) == 1:
-
-        if letter in word:
-            print("correct")
-            chosen += letter[0]
-
-            guess.delete(0, END)
-
-            blanks.pack_forget()
-            blanks.pack(padx=(100, 0), side=LEFT)
-
-        else:
-            print("incorrect")
-            guess.delete(0, END)
-
-        for i in range(0, len(word)):
-            if (word[i] in chosen):
-                display_string += word[i] + " "
-            else:
-                display_string += "_ "
-
-        display.set(display_string)
-
-    else:
-        print("You can only guess one letter at a time")
-
-    return letter[0], chosen
+    if display_string == secret_word:
+        print("You won :)")
+    label.configure(text=display)
 
 def game_status(word, chosen):
     # show graphics & chosen letters
@@ -111,55 +77,38 @@ def show_hangman(wrongCounter):
         print("      |")
 
 def main_timed():
-
-    for i in root.winfo_children():
-        i.destroy()
-    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
-    title.grid(row = 0, columnspan=3, pady=50, padx=50)
-    print(next_round)
-
-
-    game_over = False
-
-    global chosen_letters
     global secret_word
+    global display_blanks
+    global display
+    global blanks
+
+    clear_window()
 
     secret_word = choose_word()
+    game_over = False
+    display = StringVar()
 
-    
-    while game_over == False:
-       guess_text = Label(root, text="enter letter guess:")
-       display_string = ""
-       guess_text.grid(root, row = 3)
-        
-       global guess
-       global display
-       global blanks
-      
-       guess = Entry(root)
-       guess.grid(root, row = 3)
-      
-       display = StringVar()
-       blanks = Label(root, textvariable=display)
-      
-       submit = Button(root, text="Submit Guess", font=("Arial", 24))
-       submit['command'] = lambda arg1 = chosen_letters, arg2 = display_string: handle_guess(arg1, arg2)
-       submit.pack(root, row = 3)
-       
-       chosen_letters += handle_guess(chosen_letters, display_string)
-       game_over = game_status(secret_word, chosen_letters)
-       
+    display_blanks = display_word(secret_word)
+    display = display_blanks.split(" ")
+    display.remove(display[-1])
 
+    blanks = Label(root, text=display_blanks)
+    blanks.grid(row=4, column=2)
 
-    for i in root.winfo_children():
-            i.destroy()
+    # game_over = game_status(secret_word, chosen_letters)
+
+    def input(event):
+        letter = event.char
+        handle_guess(blanks, letter)
+
+    root.bind("<Key>", input)
 
 root = Tk()
 root.geometry("1440x900")
-# frame = Frame(root, background = "yellow", bd = 2, )
-# frame.grid()
 
-
+def clear_window():
+    for i in root.winfo_children():
+            i.destroy()
 
 def all_widgets (window) :
     widget_list = window.winfo_children()
@@ -167,7 +116,6 @@ def all_widgets (window) :
         if item.winfo_children():
             _list.extend(item.winfo_children())
     return _list
-
 
 
 def init_GUI():
