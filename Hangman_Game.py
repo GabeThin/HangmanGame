@@ -134,7 +134,7 @@ def all_widgets (window) :
 def init_GUI():
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
-    timed = Button(root, bd = 5, text="START", font=("Helvetica", 20), bg="red",command=main_timed)
+    timed = Button(root, text="START", font=("Helvetica", 20), command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
 init_GUI()
