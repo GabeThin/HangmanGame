@@ -13,28 +13,15 @@ def display_word(word):
         string += "_ "
     return(string)
 
-def handle_guess(label, letter):
-    display_string = ""
+def handle_guess(label, letter, lives):
     for i in range(0, len(secret_word) - 1):
         if letter == secret_word[i]:
             display[i] = letter
-    if display_string == secret_word:
-        print("You won :)")
+    if letter not in secret_word:
+        lives -= 1
+        print(lives)
     label.configure(text=display)
-
-
-# def timer(wrong_counter):
-#     time_count = 0
-#     time = 6
-#     if time_count < 6:
-#         print("bruh")
-#         start_time = threading.Timer(time, show_hangman(wrong_counter))
-#         wrong_counter += 1
-#         start_time.start()
-
-
-def hangman_draw():
-    print("bruh")
+    return lives
 
 def game_status(word, chosen):
     # show graphics & chosen letters
@@ -94,11 +81,7 @@ def main_timed():
     global display_blanks
     global display
     global blanks
-    global wrong_counter
-
-    wrong_counter = 0
-
-    time_count = 0
+    global lives
 
     clear_window()
 
@@ -114,21 +97,12 @@ def main_timed():
     blanks.grid(row=4, column=2)
 
     # game_over = game_status(secret_word, chosen_letters)
+    lives = 10
 
     def input(event):
-        # global lives
-        # lives = 30
+        global lives
         letter = event.char
-        handle_guess(blanks, letter)
-
-        # if incorrect == True:
-        #     lives -= 1
-        #     lives_string = "Lives: " + str(lives)
-        #     lives_label.configure(text=lives_string)
-        #
-        # lives_string = "Lives: " + str(lives)
-        # lives_label = Label(root, text = lives_string)
-        # lives_label.grid(row=4, column=3)
+        lives = handle_guess(blanks, letter, lives)
 
     root.bind("<Key>", input)
 
