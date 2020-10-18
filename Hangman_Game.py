@@ -53,8 +53,7 @@ def show_hangman(wrongCounter):
     hearts_canvas.grid(row = 3) 
     heart = PhotoImage(file="heart.png")      
     hearts_canvas.create_image(20,20, anchor=NW, image=img)      
-for i in range(15-wrongCounter):
-    pass
+
     
 
 def main_timed():
