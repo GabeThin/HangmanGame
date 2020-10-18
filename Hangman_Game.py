@@ -100,8 +100,8 @@ def main_timed():
     time_count = 0
     clear_window()
     
-    title = Label(root, text="HANGMAN", font=("HELVETICA", 50))
-    title.grid(row = 0, columnspan=3, pady=20, padx=20)
+    title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
+    title.grid(row = 0, columnspan=3, pady=50, padx=400)
 
     secret_word = choose_word()
     game_over = False
@@ -111,11 +111,15 @@ def main_timed():
     display = display_blanks.split(" ")
     display.remove(display[-1])
 
-    blanks = Label(root, text=display_blanks, font=("HELVETICA", 40))
-    blanks.grid(row=4, column=1, pady = 200)
+    space = Frame(root)
+    space.grid(row=2, pady=200)
     
-    press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 30))
-    press_a_key.grid(row=5, column=1, pady=1)
+    
+    blanks = Label(root, text=display_blanks, font=("HELVETICA", 40))
+    blanks.grid(row=4, column=1, pady = 10, padx=400)
+    
+    press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 20))
+    press_a_key.grid(row=5, column=1, pady=1, padx=400)
 
     # game_over = game_status(secret_word, chosen_letters)
 
