@@ -49,12 +49,18 @@ def game_status(word, chosen):
     # return boolean of whether the game is over.
 
 def show_hearts():
-    heart_load = Image.open("heart.png")
-    heart = ImageTk.PhotoImage(heart_load)
     
-    heart_display = Label(self, image=heart)
-    heart_display.image = heart_load
-    heartdisplay.grid(row=2, column =2)
+    heart_path = "heart.jpeg"
+    heart_img = ImageTk.PhotoImage(Image.open(heart_path))
+    heart_label = tk.Label(image = heart_img)
+    heart_label.grid()
+    
+#     heart_load = Image.open("heart.png")
+#     heart = ImageTk.PhotoImage(heart_load)
+    
+#     heart_display = Label(self, image=heart)
+#     heart_display.image = heart_load
+#     heartdisplay.grid(row=2, column =2)
     
 #     hearts_canvas = Canvas(root, width = 300, height = 300)      
 #     hearts_canvas.grid(row = 3) 
