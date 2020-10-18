@@ -1,7 +1,7 @@
 from tkinter import *
+from tkinter.ttk import *
 import random
 import threading
-import image
 
 def choose_word():
     words = open("words.txt").readlines()
@@ -51,10 +51,14 @@ def game_status(word, chosen):
 
 def show_hearts():
     
-    heart_path = "heart.jpeg"
-    heart_img = ImageTk.PhotoImage(Image.open(heart_path))
-    heart_label = tk.Label(image = heart_img)
-    heart_label.grid()
+    photo = PhotoImage(file = "heart.jpeg")
+    
+    
+    
+#     heart_path = "heart.jpeg"
+#     heart_img = ImageTk.PhotoImage(Image.open(heart_path))
+#     heart_label = tk.Label(image = heart_img)
+#     heart_label.grid()
     
 #     heart_load = Image.open("heart.png")
 #     heart = ImageTk.PhotoImage(heart_load)
