@@ -25,7 +25,7 @@ def handle_guess(label, letter, lives):
 
 def game_status(word, chosen):
     # show graphics & chosen letters
-    wrongCounter = 0
+    global wrongCounter = 0
     for letter in chosen:
         if letter not in word:
             wrongCounter += 1
@@ -48,7 +48,7 @@ def game_status(word, chosen):
     # announce the outcome if the game is over
     # return boolean of whether the game is over.
 
-def show_hangman(wrongCounter):
+def show_hearts(wrongCounter):
     hearts_canvas = Canvas(root, width = 300, height = 300)      
     hearts_canvas.grid(row = 3) 
     heart = PhotoImage(file="heart.png")      
@@ -72,6 +72,8 @@ def main_timed():
     game_over = False
     display = StringVar()
 
+    show_hearts()
+    
     display_blanks = display_word(secret_word)
     display = display_blanks.split(" ")
     display.remove(display[-1])
