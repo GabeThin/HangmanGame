@@ -115,7 +115,7 @@ def main_timed():
     blanks.grid(row=4, column=1, pady = 200)
     
     press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 30))
-    press_a_key.grid(row=5, column=1, pady=30)
+    press_a_key.grid(row=5, column=1, pady=1)
 
     # game_over = game_status(secret_word, chosen_letters)
 
