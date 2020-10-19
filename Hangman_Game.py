@@ -2,17 +2,25 @@ from tkinter import *
 import random
 import threading
 
+#makes the GUI
+root = Tk()
+root.geometry("1440x900")
+
+
+# randomly chooses word from words.txt
 def choose_word():
     words = open("words.txt").readlines()
     myword = random.choice(words)
     return myword
 
+#returns a string for blanks that are the length of the word
 def display_word(word):
     string = ""
     for i in range(0, len(word) - 1):
         string += "_ "
     return(string)
-
+# determines if the guess is in the word 
+# and returns the number of lives after the guess
 def handle_guess(word, label, letter, lives):
     for i in range(0, len(word) - 1):
         if letter == word[i]:
@@ -24,7 +32,7 @@ def handle_guess(word, label, letter, lives):
         heart_label.configure(text=heart_text)
     label.configure(text=display)
     return lives
-
+# checks to see if the game is over 
 def game_status(lives):
     global win_counter
     display_string = ""
@@ -41,9 +49,8 @@ def game_status(lives):
         win_counter += 1
         return False
     return False
-    # announce the outcome if the game is over
-    # return boolean of whether the game is over.
 
+#shows the number of lives remaining in hearts
 def show_hearts():
     global lives
     global heart_label
@@ -55,6 +62,7 @@ def show_hearts():
 
     return heart_text
 
+#main function that runs all others, and displays all widgets
 def main_timed():
     global secret_word
     global display_blanks
@@ -89,6 +97,7 @@ def main_timed():
 
     win_counter = 0
 
+#checks to see if letter input is valid, or prints victory statement if you win.
     def input(event):
         global blanks
         global secret_word
@@ -115,26 +124,18 @@ def main_timed():
 
     root.bind("<Key>", input)
 
-root = Tk()
-root.geometry("1440x900")
-
+#clears all widgets
 def clear_window():
     for i in root.winfo_children():
             i.destroy()
-
-def all_widgets (window) :
-    widget_list = window.winfo_children()
-    for item in widget_list:
-        if item.winfo_children():
-            _list.extend(item.winfo_children())
-    return _list
-
-
+       
+#initial program; displays title page and triggers main_timed()
 def init_GUI():
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
     timed = Button(root, text="START", font=("Helvetica", 20), command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
+#starts the program
 init_GUI()
 root.mainloop()
