@@ -2,18 +2,27 @@ from tkinter import *
 import random
 import threading
 
-def choose_word(): # chooses a random word from a list
+#clears all widgets
+def clear_window():
+    for i in root.winfo_children():
+            i.destroy()
+
+# randomly chooses word from words.txt
+def choose_word():
     words = open("words.txt").readlines()
     myword = random.choice(words)
     return myword
 
-def display_word(word): # displays the blanks for the word
+#returns a string for blanks that are the length of the word
+def display_word(word):
     string = ""
     for i in range(0, len(word) - 1):
         string += "_ " # adds a blank for each letter in the secret word
     return(string)
 
-def handle_guess(word, label, letter, lives): # handles the user's letter guess
+# determines if the guess is in the word
+# and returns the number of lives after the guess
+def handle_guess(word, label, letter, lives):
     for i in range(0, len(word) - 1):
         if letter == word[i]: # if the guess is correct, it will replace the blank with the correct letter
             display[i] = letter
@@ -23,8 +32,8 @@ def handle_guess(word, label, letter, lives): # handles the user's letter guess
         heart_label.configure(text=heart_text)
     label.configure(text=display)
     return lives
-
-def game_status(lives): # checks if the game is over
+# checks to see if the game is over
+def game_status(lives):
     global win_counter
     display_string = ""
 
@@ -41,7 +50,8 @@ def game_status(lives): # checks if the game is over
         return False
     return False
 
-def show_hearts(lives): # shows the number of lives in the window
+#shows the number of lives remaining in hearts in the window
+def show_hearts(lives):
     global heart_label
 
     heart_text = ""
@@ -51,6 +61,34 @@ def show_hearts(lives): # shows the number of lives in the window
 
     return heart_text
 
+#checks to see if letter input is valid, or prints victory statement if you win.
+    def input(event):
+        global blanks
+        global secret_word
+        global lives
+        global game_over
+        global display_blanks
+        global display
+
+        letter = event.char
+
+        if letter.isalpha() == True:
+            if win_counter == 0:
+                print(secret_word)
+                lives = handle_guess(secret_word, blanks, letter, lives)
+                game_over = game_status(lives)
+
+            if win_counter == 1:
+                clear_window()
+                you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
+                you_win.grid(row=3, column=1, padx=600, pady=350)
+
+    if game_over == True:
+        print("game_over")
+
+    root.bind("<Key>", input)
+
+#main function that runs all others, and displays all widgets
 def main_timed():
     global secret_word
     global display
@@ -84,7 +122,8 @@ def main_timed():
 
     win_counter = 0
 
-    def input(event): # function runs when a key is pressed
+# function runs when a key is pressed
+    def input(event):
         global blanks
         global secret_word
         global lives
@@ -94,7 +133,7 @@ def main_timed():
 
         letter = event.char
 
-        if letter.isalpha() == True:
+        if letter.isalpha() == True: # checks to see if the key pressed is a letter
             if win_counter == 0:
                 lives = handle_guess(secret_word, blanks, letter, lives) # handles the guess using the user's key input
                 game_over = game_status(lives) # runs game_status() to see if the game is over
