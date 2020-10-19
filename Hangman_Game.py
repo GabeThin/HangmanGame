@@ -56,7 +56,7 @@ def show_hearts():
     
 #     heart_path = "heart.jpeg"
 #     heart_img = ImageTk.PhotoImage(Image.open(heart_path))
-    heart_label = tk.Label(root, image = "heart_img")
+    heart_label = tk.Label(root, image = photo)
     heart_label.grid()
     
 #     heart_load = Image.open("heart.png")
