@@ -19,7 +19,9 @@ def handle_guess(word, label, letter, lives):
             display[i] = letter
     if letter not in word:
         lives -= 1
-        print(lives)
+        heart_text = str(show_hearts())
+        print(heart_text)
+        heart_label.configure(text=heart_text)
     label.configure(text=display)
     return lives
 
@@ -44,29 +46,15 @@ def game_status(lives):
     # return boolean of whether the game is over.
 
 def show_hearts():
-    
-    photo = PhotoImage(file = "heart.jpeg")
-    
-    
-    
-#     heart_path = "heart.jpeg"
-#     heart_img = ImageTk.PhotoImage(Image.open(heart_path))
-    heart_label = tk.Label(root, image = photo)
-    heart_label.grid()
-    
-#     heart_load = Image.open("heart.png")
-#     heart = ImageTk.PhotoImage(heart_load)
-    
-#     heart_display = Label(self, image=heart)
-#     heart_display.image = heart_load
-#     heartdisplay.grid(row=2, column =2)
-    
-#     hearts_canvas = Canvas(root, width = 300, height = 300)      
-#     hearts_canvas.grid(row = 3) 
-#     heart = PhotoImage(file="heart.png")      
-#     hearts_canvas.create_image(20,20, anchor=NW, image=img)      
+    global lives
+    global heart_label
 
-    
+    heart_text = ""
+
+    for i in range(0, lives - 1):
+        heart_text += "♡"
+
+    return heart_text
 
 def main_timed():
     global secret_word
@@ -75,59 +63,53 @@ def main_timed():
     global blanks
     global lives
     global win_counter
+    global heart_label
 
+    lives = 15
     clear_window()
     
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
 
+    heart_text = show_hearts()
+    heart_label = Label(root, text=heart_text, fg="red", font=("Arial", 50))
+    heart_label.grid(row=3, column=1)
+
     secret_word = choose_word()
     game_over = False
     display = StringVar()
-
-    show_hearts()
     
     display_blanks = display_word(secret_word)
     display = display_blanks.split(" ")
     display.remove(display[-1])
 
-    space = Frame(root)
-    space.grid(row=2, pady=200)
-
     blanks = Label(root, text=display_blanks, font=("HELVETICA", 40))
-    blanks.grid(row=4, column=1, pady = 10, padx=400)
-    
-    press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 20))
-    press_a_key.grid(row=5, column=1, pady=1, padx=400)
+    blanks.grid(row=4, column=1)
+    press_a_key = Label(root, text="Press a key to make your guess", font=("HELVETICA", 20))
+    press_a_key.grid(row=5, column=1)
 
-    lives = 10
     win_counter = 0
 
     def input(event):
+        global blanks
         global secret_word
         global lives
         global game_over
         global display_blanks
         global display
-        if win_counter == 0:
-            letter = event.char
-            print(secret_word)
-            lives = handle_guess(secret_word, blanks, letter, lives)
-            game_over = game_status(lives)
 
-        elif win_counter - old_win_counter == 1:
-            secret_word = choose_word()
-            print(secret_word)
-            letter = event.char
-            display_blanks = display_word(secret_word)
-            display = display_blanks.split(" ")
-            display.remove(display[-1])
-            blanks.configure(text = display_blanks)
+        letter = event.char
 
-            lives = handle_guess(secret_word, blanks, letter, lives)
-            game_over = game_status(lives)
+        if letter.isalpha() == True:
+            if win_counter == 0:
+                print(secret_word)
+                lives = handle_guess(secret_word, blanks, letter, lives)
+                game_over = game_status(lives)
 
-
+            if win_counter == 1:
+                clear_window()
+                you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
+                you_win.grid(row=3, column=1, padx=400, pady=300)
 
     if game_over == True:
         print("game_over")
