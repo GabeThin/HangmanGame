@@ -43,33 +43,30 @@ def game_status(lives):
     # announce the outcome if the game is over
     # return boolean of whether the game is over.
 
-def show_hangman(wrongCounter):
-    print("   --- ")
-    if wrongCounter >= 1:
-        print("   O  |")
-    else:
-        print("      |")
-    if wrongCounter >= 2:
-        if wrongCounter >= 3:
-            if wrongCounter >= 4:
-                print("  /|\ |")
-            else:
-                print("  /|  |")
-        else:
-            print("  /   |")
-    else:
-        print("      |")
-    if wrongCounter >= 5:
-        print("   |  |")
-    else:
-        print("      |")
-    if wrongCounter >= 6:
-        if wrongCounter >= 7:
-            print("  / \ |")
-        else:
-            print("  /   |")
-    else:
-        print("      |")
+def show_hearts():
+    
+    photo = PhotoImage(file = "heart.jpeg")
+    
+    
+    
+#     heart_path = "heart.jpeg"
+#     heart_img = ImageTk.PhotoImage(Image.open(heart_path))
+    heart_label = tk.Label(root, image = photo)
+    heart_label.grid()
+    
+#     heart_load = Image.open("heart.png")
+#     heart = ImageTk.PhotoImage(heart_load)
+    
+#     heart_display = Label(self, image=heart)
+#     heart_display.image = heart_load
+#     heartdisplay.grid(row=2, column =2)
+    
+#     hearts_canvas = Canvas(root, width = 300, height = 300)      
+#     hearts_canvas.grid(row = 3) 
+#     heart = PhotoImage(file="heart.png")      
+#     hearts_canvas.create_image(20,20, anchor=NW, image=img)      
+
+    
 
 def main_timed():
     global secret_word
@@ -88,6 +85,8 @@ def main_timed():
     game_over = False
     display = StringVar()
 
+    show_hearts()
+    
     display_blanks = display_word(secret_word)
     display = display_blanks.split(" ")
     display.remove(display[-1])
@@ -153,7 +152,7 @@ def all_widgets (window) :
 def init_GUI():
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
-    timed = Button(root, bd = 5, text="START", font=("Helvetica", 20), bg="red",command=main_timed)
+    timed = Button(root, text="START", font=("Helvetica", 20), command=main_timed)
     timed.grid(row = 2, columnspan=3)
 
 init_GUI()
