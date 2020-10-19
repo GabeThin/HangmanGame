@@ -26,17 +26,16 @@ def handle_guess(word, label, letter, lives):
     return lives
 
 def game_status(lives):
-    global old_win_counter
     global win_counter
     display_string = ""
-
-    old_win_counter = win_counter
 
     for i in range(0, len(display)):
         display_string += str(display[i])
 
     if lives == 0:
-        print("You lost :(")
+        clear_window()
+        you_lost = Label(root, text="YOU LOST :(", font=("Helvetica",40))
+        you_lost.grid(row=3, column=1, padx=600, pady=350)
         return True
     if "_" not in display_string:
         win_counter += 1
@@ -65,9 +64,9 @@ def main_timed():
     global win_counter
     global heart_label
 
-    lives = 15
+    lives = 5
     clear_window()
-    
+
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
 
@@ -78,7 +77,7 @@ def main_timed():
     secret_word = choose_word()
     game_over = False
     display = StringVar()
-    
+
     display_blanks = display_word(secret_word)
     display = display_blanks.split(" ")
     display.remove(display[-1])
@@ -109,7 +108,7 @@ def main_timed():
             if win_counter == 1:
                 clear_window()
                 you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
-                you_win.grid(row=3, column=1, padx=400, pady=300)
+                you_win.grid(row=3, column=1, padx=600, pady=350)
 
     if game_over == True:
         print("game_over")
