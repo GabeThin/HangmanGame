@@ -6,6 +6,10 @@ import threading
 root = Tk()
 root.geometry("1440x900")
 
+#clears all widgets
+def clear_window():
+    for i in root.winfo_children():
+            i.destroy()
 
 # randomly chooses word from words.txt
 def choose_word():
@@ -62,6 +66,33 @@ def show_hearts():
 
     return heart_text
 
+#checks to see if letter input is valid, or prints victory statement if you win.
+    def input(event):
+        global blanks
+        global secret_word
+        global lives
+        global game_over
+        global display_blanks
+        global display
+
+        letter = event.char
+
+        if letter.isalpha() == True:
+            if win_counter == 0:
+                print(secret_word)
+                lives = handle_guess(secret_word, blanks, letter, lives)
+                game_over = game_status(lives)
+
+            if win_counter == 1:
+                clear_window()
+                you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
+                you_win.grid(row=3, column=1, padx=600, pady=350)
+
+    if game_over == True:
+        print("game_over")
+
+    root.bind("<Key>", input)
+
 #main function that runs all others, and displays all widgets
 def main_timed():
     global secret_word
@@ -97,38 +128,6 @@ def main_timed():
 
     win_counter = 0
 
-#checks to see if letter input is valid, or prints victory statement if you win.
-    def input(event):
-        global blanks
-        global secret_word
-        global lives
-        global game_over
-        global display_blanks
-        global display
-
-        letter = event.char
-
-        if letter.isalpha() == True:
-            if win_counter == 0:
-                print(secret_word)
-                lives = handle_guess(secret_word, blanks, letter, lives)
-                game_over = game_status(lives)
-
-            if win_counter == 1:
-                clear_window()
-                you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
-                you_win.grid(row=3, column=1, padx=600, pady=350)
-
-    if game_over == True:
-        print("game_over")
-
-    root.bind("<Key>", input)
-
-#clears all widgets
-def clear_window():
-    for i in root.winfo_children():
-            i.destroy()
-       
 #initial program; displays title page and triggers main_timed()
 def init_GUI():
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120))
