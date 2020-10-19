@@ -145,10 +145,6 @@ def main_timed():
 
     root.bind("<Key>", input) # calls input function if a key is pressed
 
-def clear_window():
-    for i in root.winfo_children():
-            i.destroy()
-
 def init_GUI(): # title screen
     title = Label(root, text="HANGMAN", font=("HELVETICA", 120)) # hangman title
     title.grid(row = 0, columnspan=3, pady=50, padx=400)
