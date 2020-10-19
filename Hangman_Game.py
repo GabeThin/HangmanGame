@@ -13,38 +13,33 @@ def display_word(word):
         string += "_ "
     return(string)
 
-def handle_guess(label, letter, lives):
-    for i in range(0, len(secret_word) - 1):
-        if letter == secret_word[i]:
+def handle_guess(word, label, letter, lives):
+    for i in range(0, len(word) - 1):
+        if letter == word[i]:
             display[i] = letter
-    if letter not in secret_word:
+    if letter not in word:
         lives -= 1
         print(lives)
     label.configure(text=display)
     return lives
 
-def game_status(word, chosen):
-    # show graphics & chosen letters
-    wrongCounter = 0
-    for letter in chosen:
-        if letter not in word:
-            wrongCounter += 1
-    won = True
-    for letter in word:
-        if letter not in chosen:
-            won = False
-    if wrongCounter >= 7:
+def game_status(lives):
+    global old_win_counter
+    global win_counter
+    display_string = ""
+
+    old_win_counter = win_counter
+
+    for i in range(0, len(display)):
+        display_string += str(display[i])
+
+    if lives == 0:
         print("You lost :(")
-        show_hangman(wrongCounter)
         return True
-    elif won:
-        print("You Won!")
-        show_hangman(wrongCounter)
-        return True
-    else:
-        show_hangman(wrongCounter)
-        print("Already guessed:", chosen)
+    if "_" not in display_string:
+        win_counter += 1
         return False
+    return False
     # announce the outcome if the game is over
     # return boolean of whether the game is over.
 
@@ -82,6 +77,7 @@ def main_timed():
     global display
     global blanks
     global lives
+    global win_counter
 
     clear_window()
     
@@ -98,21 +94,44 @@ def main_timed():
 
     space = Frame(root)
     space.grid(row=2, pady=200)
-    
-    
+
     blanks = Label(root, text=display_blanks, font=("HELVETICA", 40))
     blanks.grid(row=4, column=1, pady = 10, padx=400)
     
     press_a_key = Label(root, text="Press a key to make your guess.", font=("HELVETICA", 20))
     press_a_key.grid(row=5, column=1, pady=1, padx=400)
 
-    # game_over = game_status(secret_word, chosen_letters)
     lives = 10
+    win_counter = 0
 
     def input(event):
+        global secret_word
         global lives
-        letter = event.char
-        lives = handle_guess(blanks, letter, lives)
+        global game_over
+        global display_blanks
+        global display
+        if win_counter == 0:
+            letter = event.char
+            print(secret_word)
+            lives = handle_guess(secret_word, blanks, letter, lives)
+            game_over = game_status(lives)
+
+        elif win_counter - old_win_counter == 1:
+            secret_word = choose_word()
+            print(secret_word)
+            letter = event.char
+            display_blanks = display_word(secret_word)
+            display = display_blanks.split(" ")
+            display.remove(display[-1])
+            blanks.configure(text = display_blanks)
+
+            lives = handle_guess(secret_word, blanks, letter, lives)
+            game_over = game_status(lives)
+
+
+
+    if game_over == True:
+        print("game_over")
 
     root.bind("<Key>", input)
 
