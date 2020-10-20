@@ -61,33 +61,6 @@ def show_hearts(lives):
 
     return heart_text
 
-#checks to see if letter input is valid, or prints victory statement if you win.
-    def input(event):
-        global blanks
-        global secret_word
-        global lives
-        global game_over
-        global display_blanks
-        global display
-
-        letter = event.char
-
-        if letter.isalpha() == True:
-            if win_counter == 0:
-                print(secret_word)
-                lives = handle_guess(secret_word, blanks, letter, lives)
-                game_over = game_status(lives)
-
-            if win_counter == 1:
-                clear_window()
-                you_win = Label(root, text="YOU WIN!!", font=("Helvetica",40))
-                you_win.grid(row=3, column=1, padx=600, pady=350)
-
-    if game_over == True:
-        print("game_over")
-
-    root.bind("<Key>", input)
-
 #main function that runs all others, and displays all widgets
 def main_timed():
     global secret_word
